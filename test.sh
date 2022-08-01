@@ -4,7 +4,7 @@ assert() {
  expected="$1"
  input="$2"
 
- ./9cc "$input" > tmp.s
+ ./9cc "$input" > tmp.s # コンパイラの実行バイナリ(9cc)に第二引数を与えて、その結果をアセンブリファイルとして出力
  cc -o tmp tmp.s
  ./tmp
  actual="$?"

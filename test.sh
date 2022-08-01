@@ -4,11 +4,19 @@ assert() {
  expected="$1"
  input="$2"
 
- ./9cc "$input" > tmp.s # コンパイラの実行バイナリ(9cc)に第二引数を与えて、その結果をアセンブリファイルとして出力
+ # 本リポジトリで作成したコンパイラコードの実行バイナリ(9cc)に第二引数を与えて、その結果をアセンブリファイル(tmp.s)として出力
+ ./9cc "$input" > tmp.s
+ 
+ # 標準のコンパイラ(cc)に、アセンブリファイル(tmp.s)を渡し、実行バイナリ(tmp)を生成
  cc -o tmp tmp.s
+ 
+ # 実行バイナリ(tmp)を実行
  ./tmp
+ 
+ # 直前の実行バイナリを実行した時の出力を、変数actualに渡す
  actual="$?"
 
+ # 
  if [ "$actual" = "$expected" ]; then
    echo "$input => $actual"
  else
